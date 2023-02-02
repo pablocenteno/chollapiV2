@@ -38,7 +38,7 @@ public class Producto implements Serializable {
     private List<Oferta> ofertas = new ArrayList<Oferta>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("categoria_id")
+    @JoinColumn(name="categoria_id")
     private Categoria categoria;
 
     public void anadirOferta(Oferta o)
