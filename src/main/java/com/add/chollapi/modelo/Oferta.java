@@ -16,6 +16,7 @@ public class Oferta implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String url;
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     private Float precio;
     private Boolean disponible;

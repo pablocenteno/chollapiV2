@@ -12,16 +12,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Transactional
 @Service
-public class ServiceImpls implements com.add.chollapi.servicio.Service {
+public class OfertaServiceImpl implements com.add.chollapi.servicio.OfertaService {
 
-    @Autowired
-    CategoriaRepository categoriaRepository;
-    @Autowired
-    ProductoRepository productoRepository;
     @Autowired
     OfertaRepository ofertaRepository;
 
@@ -49,10 +44,10 @@ public class ServiceImpls implements com.add.chollapi.servicio.Service {
     }
 
     @Override
-    public boolean borrarOferta(Oferta of) {
+    public boolean borrarOferta(Long idOferta) {
         ArrayList<Oferta> ofertas = new ArrayList<>();
         for(Oferta o: ofertas) {
-            if(o.equals(of)) {
+            if(o.getId().equals(idOferta)) {
                 ofertaRepository.delete(o);
                 return true;
             }
@@ -60,29 +55,8 @@ public class ServiceImpls implements com.add.chollapi.servicio.Service {
         return false;
     }
 
-    @Override
-    public Categoria crearCategoria(Categoria categoria) {
-        return categoriaRepository.save(categoria);
-    }
 
-    @Override
-    public Optional<Categoria> obtenerCategoria(Long id) {
-        return categoriaRepository.findById(id);
-    }
 
-    @Override
-    public Categoria modificarCategoria(Categoria categoria) {
-        return categoriaRepository.save(categoria);
-    }
 
-    public boolean borrarCategoria(Long idcat) {
 
-        Categoria cat = categoriaRepository.findById(idcat).get();
-        List<Producto> lista = cat.getProductos();
-        for (Producto p : lista) {
-            p.getCategoria().setId(1L);
-        }
-
-        return true;
-    }
 }
