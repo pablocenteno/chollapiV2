@@ -23,7 +23,7 @@ public class OfertaServiceImpl implements com.add.chollapi.servicio.OfertaServic
 
     @Override
     public Oferta obtenerOferta(Long id) {
-        return ofertaRepository.getById(id);
+        return ofertaRepository.findById(id).get();
     }
 
     @Override
@@ -45,14 +45,10 @@ public class OfertaServiceImpl implements com.add.chollapi.servicio.OfertaServic
 
     @Override
     public boolean borrarOferta(Long idOferta) {
-        ArrayList<Oferta> ofertas = new ArrayList<>();
-        for(Oferta o: ofertas) {
-            if(o.getId().equals(idOferta)) {
-                ofertaRepository.delete(o);
+
+                ofertaRepository.deleteById(idOferta);
                 return true;
-            }
-        }
-        return false;
+
     }
 
 

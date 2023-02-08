@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Transactional
 @Service
@@ -32,13 +33,26 @@ public class ProductoServiceImpl implements ProductoService
 
     @Override
     public boolean borrarProducto(Long idProd) {
-        ArrayList<Producto> productos= new ArrayList<>();
-        for (Producto p:productos){
-            if(p.getId().equals(idProd)){
-                productoRepository.delete(p);
+
+
+                productoRepository.deleteById(idProd);
                 return true;
-            }
-        }
-        return false;
     }
+
+    @Override
+    public Producto buscarProducto(String nombre, String desc) {
+        return productoRepository.buscarProducto(nombre, desc);
+    }
+
+    @Override
+    public List<Producto> mejores10_precio(Long id) {
+        return productoRepository.mejores10_precio(id);
+    }
+
+    @Override
+    public List<Producto> ultimos5_de_categoria(Long idCat) {
+        return productoRepository.ultimos5_de_categoria(idCat);
+    }
+
+
 }

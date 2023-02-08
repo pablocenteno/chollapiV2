@@ -29,11 +29,11 @@ public class OfertaController {
    @RequestMapping(method= RequestMethod.POST, value = {"/oferta"})
        public ResponseEntity<String>crearOferta(@RequestBody Oferta oferta){
 
-       return ResponseEntity.status(HttpStatus.OK).header("Content-Type","application/json").body(ofertaService.crearOferta(oferta).toString());
+       return ResponseEntity.status(HttpStatus.OK).header("Content-Type","application/json").body(toJson(ofertaService.crearOferta(oferta)));
    }
 
     @RequestMapping(method= RequestMethod.GET, value = {"/oferta"})
-    public ResponseEntity<String>obtenerOferta(@RequestParam(value="id", defaultValue = "1") Long id){
+    public ResponseEntity<String>obtenerOferta(@RequestParam Long id){
 
         return ResponseEntity.status(HttpStatus.OK).header("Content-Type", "application/json").body(toJson(ofertaService.obtenerOferta(id)));
     }
@@ -41,14 +41,20 @@ public class OfertaController {
     @RequestMapping(method= RequestMethod.PUT, value = {"/oferta"})
     public ResponseEntity<String>modificarOferta(@RequestBody Oferta oferta){
 
-        return ResponseEntity.status(HttpStatus.OK).header("Content-Type","application/json").body(ofertaService.modificarOferta(oferta).toString());
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type","application/json").body(toJson(ofertaService.modificarOferta(oferta)));
     }
 
 
     @RequestMapping(method= RequestMethod.DELETE, value = {"/oferta"})
-    public ResponseEntity<Boolean>borrarOferta(@RequestBody Long idOferta){
+    public ResponseEntity<Boolean>borrarOferta(@RequestParam Long idOferta){
 
         return ResponseEntity.status(HttpStatus.OK).header("Content-Type","application/json").body(ofertaService.borrarOferta(idOferta));
+    }
+
+    @RequestMapping(method= RequestMethod.GET, value = {"/oferta"})
+    public ResponseEntity<String>obtenerOferta(@RequestParam Long id){
+
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type", "application/json").body(toJson(ofertaService.obtenerOferta(id)));
     }
 
 

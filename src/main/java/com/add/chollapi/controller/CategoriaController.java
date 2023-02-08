@@ -25,7 +25,7 @@ public class CategoriaController {
     @RequestMapping(method = RequestMethod.POST, value ={"/categoria"})
     public ResponseEntity<String> crearCategoria(@RequestBody Categoria categoria) {
 
-        return ResponseEntity.status(HttpStatus.OK).header("Content-Type", "application/json").body(categoriaService.crearCategoria(categoria).toString());
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type", "application/json").body(toJson(categoriaService.crearCategoria(categoria)));
     }
 
     @RequestMapping(method = RequestMethod.GET, value ={"/categoria"})
@@ -39,11 +39,11 @@ public class CategoriaController {
     public ResponseEntity<String> modificarCategoria(@RequestBody Categoria categoria) {
 
 
-        return ResponseEntity.status(HttpStatus.OK).header("Content-Type", "application/json").body(categoriaService.modificarCategoria(categoria).toString());
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type", "application/json").body(toJson(categoriaService.modificarCategoria(categoria)));
     }
     @RequestMapping(method = RequestMethod.DELETE, value ={"/categoria"})
 
-    public ResponseEntity<Boolean> borrarCategoria(@RequestBody Long idCategoria) {
+    public ResponseEntity<Boolean> borrarCategoria(@RequestParam Long idCategoria) {
 
 
         return ResponseEntity.status(HttpStatus.OK).header("Content-Type", "application/json").body(categoriaService.borrarCategoria(idCategoria));

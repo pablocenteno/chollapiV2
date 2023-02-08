@@ -2,6 +2,7 @@ package com.add.chollapi.modelo;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NamedQuery;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Oferta implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

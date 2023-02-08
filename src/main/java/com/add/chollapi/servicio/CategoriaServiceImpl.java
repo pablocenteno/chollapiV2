@@ -37,6 +37,7 @@ public class CategoriaServiceImpl implements com.add.chollapi.servicio.Categoria
         for (Producto p : lista) {
             p.setCategoria(cat1);
         }
+        categoriaRepository.deleteById(idcat);
 
         return true;
     }

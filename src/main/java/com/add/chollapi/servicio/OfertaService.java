@@ -10,6 +10,8 @@ public interface OfertaService {
     Oferta modificarOferta(Oferta of);
     boolean borrarOferta(Long idOf);
 
+    boolean
+
 
 
 
