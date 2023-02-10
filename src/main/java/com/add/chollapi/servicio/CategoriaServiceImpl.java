@@ -41,4 +41,9 @@ public class CategoriaServiceImpl implements com.add.chollapi.servicio.Categoria
 
         return true;
     }
+
+    @Override
+    public List<Producto> ultimos5_de_categoria(Long idCat) {
+        return categoriaRepository.ultimos5_de_categoria(idCat);
+    }
 }

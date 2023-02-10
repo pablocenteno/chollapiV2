@@ -8,6 +8,8 @@ import com.add.chollapi.repositorios.OfertaRepository;
 import com.add.chollapi.repositorios.ProductoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -51,8 +53,20 @@ public class OfertaServiceImpl implements com.add.chollapi.servicio.OfertaServic
 
     }
 
+    @Override
+    public List<Oferta>ultimas5_de_producto(Long idProd) {
+        return ofertaRepository.ultimas5_de_producto(idProd);
+    }
 
+    @Override
+    public List<Oferta> ultimas5_de_categoria(Long idCat) {
+        return ofertaRepository.ultimas5_de_categoria(idCat);
+    }
 
+    @Override
+    public Page<Oferta> ofertasPaginadas(Pageable pageable) {
+        return ofertaRepository.findAll(pageable);
+    }
 
 
 }

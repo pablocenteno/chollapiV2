@@ -5,8 +5,11 @@ import com.add.chollapi.modelo.Producto;
 import com.add.chollapi.repositorios.OfertaRepository;
 import com.add.chollapi.servicio.OfertaService;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,8 +25,8 @@ public class OfertaController {
     OfertaService ofertaService;
 
     public String toJson(Object object){
-        Gson gson = new Gson();
-        return gson.toJson(object);
+        GsonBuilder gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
+        return gson.create().toJson(object);
     }
 
    @RequestMapping(method= RequestMethod.POST, value = {"/oferta"})
@@ -51,10 +54,21 @@ public class OfertaController {
         return ResponseEntity.status(HttpStatus.OK).header("Content-Type","application/json").body(ofertaService.borrarOferta(idOferta));
     }
 
-    @RequestMapping(method= RequestMethod.GET, value = {"/oferta"})
-    public ResponseEntity<String>obtenerOferta(@RequestParam Long id){
+    @RequestMapping(method= RequestMethod.GET, value = {"/oferta/ultimas5ofertas"})
+    public ResponseEntity<String>ultimas5_de_producto(@RequestParam Long idProducto){
 
-        return ResponseEntity.status(HttpStatus.OK).header("Content-Type", "application/json").body(toJson(ofertaService.obtenerOferta(id)));
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type", "application/json").body(toJson(ofertaService.obtenerOferta(idProducto)));
+    }
+
+    @RequestMapping(method= RequestMethod.GET, value = {"/oferta/ultimas5"})
+    public ResponseEntity<String>ultimas5_de_categoria(@RequestParam Long idCategoria){
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type","application/json").body(toJson(ofertaService.ultimas5_de_categoria(idCategoria)));
+    }
+
+    @RequestMapping(method= RequestMethod.GET, value = "/oferta/list", params = {"count", "page"})
+    public ResponseEntity<String> ofertasPaginadas(@RequestParam(name = "count", defaultValue = "5")int count, @RequestParam(name = "page", defaultValue = "1") int page){
+        Page<Oferta> ofertas=ofertaService.ofertasPaginadas(PageRequest.of(count, page));
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type","application/json").body(toJson(ofertas));
     }
 
 

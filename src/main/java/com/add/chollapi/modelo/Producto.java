@@ -14,16 +14,23 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+
 public class Producto implements Serializable {
+    @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Expose
     private String nombre;
+    @Expose
     private Long idFabricante;
+    @Expose
+    private String caracteristicas;
 
 
 
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="producto_oferta"
             , joinColumns={

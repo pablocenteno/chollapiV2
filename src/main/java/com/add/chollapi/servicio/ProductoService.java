@@ -1,6 +1,10 @@
 package com.add.chollapi.servicio;
 
+import com.add.chollapi.dto.ProductoDto;
+import com.add.chollapi.modelo.Oferta;
 import com.add.chollapi.modelo.Producto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -10,8 +14,10 @@ public interface ProductoService {
     Producto modificarProducto(Producto prod);
     boolean borrarProducto(Long idProd);
 
-    Producto buscarProducto(String nombre, String desc);
-    public List<Producto> mejores10_precio(Long id);
+    Producto buscarProducto(String desc);
+    List<Oferta> mejores10_precio(Long id);
 
-    public List<Producto> ultimos5_de_categoria(Long idCat);
+    Page<Producto> productosPaginado(Pageable pageable);
+
+
 }

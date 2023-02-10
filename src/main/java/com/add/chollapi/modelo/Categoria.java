@@ -15,15 +15,18 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Categoria implements Serializable {
+    @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Expose
     private String nombre;
+    @Expose
     private String descripcion;
 
 
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.MERGE, orphanRemoval = true,fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Producto> productos = new ArrayList<>();
 

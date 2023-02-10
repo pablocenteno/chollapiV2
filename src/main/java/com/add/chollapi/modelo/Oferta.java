@@ -1,5 +1,6 @@
 package com.add.chollapi.modelo;
 
+import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,16 +15,21 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Oferta implements Serializable {
+    @Expose
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    @Expose
     private String url;
+    @Expose
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    @Expose
     private Float precio;
+    @Expose
     private Boolean disponible;
 
-    @ManyToMany(mappedBy="ofertas", cascade={CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(mappedBy="ofertas", cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Producto> productos = new ArrayList<Producto>();
 
     public void anadirProducto(Producto p) {

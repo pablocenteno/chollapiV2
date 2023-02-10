@@ -1,6 +1,9 @@
 package com.add.chollapi.repositorios;
 
 import com.add.chollapi.modelo.Oferta;
+import com.add.chollapi.modelo.Producto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -16,7 +19,6 @@ public interface OfertaRepository extends JpaRepository<Oferta, Long>, PagingAnd
     public List<Oferta> ultimas5_de_producto(@Param(value = "idProc") Long idProc);
     @Query(value="SELECT o from Oferta o JOIN o.productos p JOIN p.categoria  c  WHERE c.id= :cat", nativeQuery = true)
     public List<Oferta> ultimas5_de_categoria(@Param(value = "cat") Long cat);
-   @Query(value = "SELECT o from Oferta o")
-    public List<Oferta> ultimas_paginadas_fecha(Date fecha);
+    Page<Oferta> findAll(Pageable pageable);
 }
 

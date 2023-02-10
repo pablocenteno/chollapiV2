@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/chollapi")
 public class CategoriaController {
     @Autowired
     CategoriaService categoriaService;
@@ -47,6 +46,11 @@ public class CategoriaController {
 
 
         return ResponseEntity.status(HttpStatus.OK).header("Content-Type", "application/json").body(categoriaService.borrarCategoria(idCategoria));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = {"/producto/ultimos5productos"})
+    public ResponseEntity<String>ultimos5_de_categoria(@RequestParam Long idCategoria){
+        return ResponseEntity.status(HttpStatus.OK).header("Content-Type","application/json").body(toJson(categoriaService.ultimos5_de_categoria(idCategoria)));
     }
 
 
