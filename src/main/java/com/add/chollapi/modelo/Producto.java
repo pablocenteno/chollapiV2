@@ -19,7 +19,7 @@ public class Producto implements Serializable {
     @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idProducto;
     @Expose
     private String nombre;
     @Expose

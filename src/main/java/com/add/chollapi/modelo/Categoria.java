@@ -18,7 +18,7 @@ public class Categoria implements Serializable {
     @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idCategoria;
     @Expose
     private String nombre;
     @Expose

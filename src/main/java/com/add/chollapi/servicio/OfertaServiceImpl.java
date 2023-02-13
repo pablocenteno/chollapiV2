@@ -29,14 +29,23 @@ public class OfertaServiceImpl implements com.add.chollapi.servicio.OfertaServic
     }
 
     @Override
-    public Oferta crearOferta(Oferta oferta) {
-        ArrayList<Oferta> ofertas = new ArrayList<>();
-        for(Oferta o: ofertas) {
-            if(o.equals(oferta)) {
+    public Oferta crearOferta(OfertaDto ofertaDto)
+    {
+        for(Oferta o: ofertaRepository.findAll())
+        {
+            if(o.getPrecio().equals(ofertaDto.getPrecio())
+                    && o.getFecha_hora_publicacion().getTime()==(ofertaDto.getFecha_hora_publicacion().getTime())
+                    &&o.getDisponible()==true)
+            {
                 System.out.println("Error, esa oferta ya existe");
                 return null;
             }
         }
+
+        Oferta oferta = new Oferta(ofertaDto.getUrl(), ofertaDto.getFecha_hora_publicacion(), ofertaDto.getPrecio(), ofertaDto.getDisponible());
+
+        oferta.anadirProducto(productoRepository.findById(ofertaDto.getIdProducto()).get());
+
         return ofertaRepository.save(oferta);
     }
 

@@ -18,12 +18,12 @@ public class Oferta implements Serializable {
     @Expose
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    private Long idOferta;
     @Expose
     private String url;
     @Expose
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
+   // @Temporal(TemporalType.DATE)
+    private Date fecha_hora_publicacion;
     @Expose
     private Float precio;
     @Expose
@@ -31,6 +31,13 @@ public class Oferta implements Serializable {
 
     @ManyToMany(mappedBy="ofertas", cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<Producto> productos = new ArrayList<Producto>();
+
+    public Oferta(String url, Date fecha_hora_publicacion, Float precio, Boolean disponible) {
+        this.url = url;
+        this.fecha_hora_publicacion = fecha_hora_publicacion;
+        this.precio = precio;
+        this.disponible = disponible;
+    }
 
     public void anadirProducto(Producto p) {
         productos.add(p);
