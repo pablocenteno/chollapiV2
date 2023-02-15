@@ -29,12 +29,15 @@ public class CategoriaServiceImpl implements com.add.chollapi.servicio.Categoria
         return categoriaRepository.save(categoria);
     }
 
-    public boolean borrarCategoria(Long idcat) {
-
+    public boolean borrarCategoria(Long idcat)
+    {
         Categoria cat = categoriaRepository.findById(idcat).get();
         Categoria cat1= categoriaRepository.findById(1L).get();
+
         List<Producto> lista = cat.getProductos();
-        for (Producto p : lista) {
+
+5           for (Producto p : lista)
+        {
             p.setCategoria(cat1);
         }
         categoriaRepository.deleteById(idcat);

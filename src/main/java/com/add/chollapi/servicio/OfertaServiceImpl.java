@@ -1,5 +1,6 @@
 package com.add.chollapi.servicio;
 
+import com.add.chollapi.dto.OfertaDto;
 import com.add.chollapi.modelo.Categoria;
 import com.add.chollapi.modelo.Oferta;
 import com.add.chollapi.modelo.Producto;
@@ -20,7 +21,9 @@ import java.util.List;
 public class OfertaServiceImpl implements com.add.chollapi.servicio.OfertaService {
 
     @Autowired
-    OfertaRepository ofertaRepository;
+    private OfertaRepository ofertaRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
 
 
     @Override
@@ -55,11 +58,10 @@ public class OfertaServiceImpl implements com.add.chollapi.servicio.OfertaServic
     }
 
     @Override
-    public boolean borrarOferta(Long idOferta) {
-
-                ofertaRepository.deleteById(idOferta);
-                return true;
-
+    public boolean borrarOferta(Long idOferta)
+    {
+        ofertaRepository.deleteById(idOferta);
+        return true;
     }
 
     @Override

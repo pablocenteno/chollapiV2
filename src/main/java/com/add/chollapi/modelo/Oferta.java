@@ -2,6 +2,7 @@ package com.add.chollapi.modelo;
 
 import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NamedQuery;

@@ -1,5 +1,6 @@
 package com.add.chollapi.controller;
 
+import com.add.chollapi.dto.OfertaDto;
 import com.add.chollapi.modelo.Oferta;
 import com.add.chollapi.modelo.Producto;
 import com.add.chollapi.repositorios.OfertaRepository;
@@ -30,7 +31,7 @@ public class OfertaController {
     }
 
    @RequestMapping(method= RequestMethod.POST, value = {"/oferta"})
-       public ResponseEntity<String>crearOferta(@RequestBody Oferta oferta){
+       public ResponseEntity<String>crearOferta(@RequestBody OfertaDto oferta){
 
        return ResponseEntity.status(HttpStatus.OK).header("Content-Type","application/json").body(toJson(ofertaService.crearOferta(oferta)));
    }
